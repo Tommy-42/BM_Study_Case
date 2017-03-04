@@ -1,0 +1,33 @@
+SQL:
+A.
+    1.
+        SELECT * FROM GOALS WHERE beauty < 0.1 OR beauty > 0.9
+
+    2. 
+        SELECT *
+        FROM PLAYERS AS p
+        JOIN GOALS AS g on ( p.player_id = g.player_id)
+        WHERE p.team LIKE "FCB" AND g.goal_id IS NOT NULL
+
+    3.
+        SELECT p.*
+        FROM (SELECT count(*) AS t_goals, player_id FROM `GOALS` WHERE 1 group by player_id) as c_goals
+        JOIN PLAYERS AS p on (p.player_id = c_goals.player_id)
+        WHERE p.team LIKE "FCB" AND c_goals.t_goals > 10 AND p.market_value < 8.0
+
+B.
+    1.
+        SELECT A.player_id, B.goal_id
+        FROM PLAYERS AS A
+        LEFT JOIN GOALS AS B on ( A.player_id = B.player_id )
+        WHERE 1
+
+        # because you take only the player that are present in the table goals.
+        # so you need to join the table to see all the player who scored and who havent
+
+    2.
+        SELECT COUNT(*), team
+        FROM PLAYERS AS A
+        LEFT JOIN GOALS AS B on (A.player_id = B.player_id)
+        WHERE B.goal_id IS NULL
+        GROUP BY team
