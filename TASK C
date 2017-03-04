@@ -14,6 +14,13 @@ A.
         FROM (SELECT count(*) AS t_goals, player_id FROM `GOALS` WHERE 1 group by player_id) as c_goals
         JOIN PLAYERS AS p on (p.player_id = c_goals.player_id)
         WHERE p.team LIKE "FCB" AND c_goals.t_goals > 10 AND p.market_value < 8.0
+    4.
+        SELECT COUNT(*), team, homeland
+        FROM PLAYERS AS A
+        LEFT JOIN GOALS AS B on (A.player_id = B.player_id)
+        WHERE B.goal_id IS NOT NULL AND DATE(B.timestamp) = "2016-11-22"
+        GROUP BY team, homeland
+
 
 B.
     SELECT A.player_id, B.goal_id
