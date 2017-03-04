@@ -16,18 +16,17 @@ A.
         WHERE p.team LIKE "FCB" AND c_goals.t_goals > 10 AND p.market_value < 8.0
 
 B.
-    1.
-        SELECT A.player_id, B.goal_id
-        FROM PLAYERS AS A
-        LEFT JOIN GOALS AS B on ( A.player_id = B.player_id )
-        WHERE 1
+    SELECT A.player_id, B.goal_id
+    FROM PLAYERS AS A
+    LEFT JOIN GOALS AS B on ( A.player_id = B.player_id )
+    WHERE 1
 
-        # because you take only the player that are present in the table goals.
-        # so you need to join the table to see all the player who scored and who havent
+    # because you take only the player that are present in the table goals.
+    # so you need to join the table to see all the player who scored and who    havent
 
-    2.
-        SELECT COUNT(*), team
-        FROM PLAYERS AS A
-        LEFT JOIN GOALS AS B on (A.player_id = B.player_id)
-        WHERE B.goal_id IS NULL
-        GROUP BY team
+C
+    SELECT COUNT(*), team
+    FROM PLAYERS AS A
+    LEFT JOIN GOALS AS B on (A.player_id = B.player_id)
+    WHERE B.goal_id IS NULL
+    GROUP BY team
