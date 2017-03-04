@@ -12,8 +12,6 @@ class TaskWordHash {
 
 class WordHash {
 
-
-
         public function __construct($list) {
 
                 $final = array();
